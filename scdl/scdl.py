@@ -442,6 +442,10 @@ def download_track(track, playlist_name=None, playlist_file=None):
     title = title.encode('utf-8', 'ignore').decode('utf8')
     logger.info('Downloading {0}'.format(title))
 
+    if track['policy'] != 'ALLOW':
+        logger.error('{0} is copyrighted'.format(title))
+        return
+    
     # Not streamable
     if not track['streamable']:
         logger.error('{0} is not streamable...'.format(title))
